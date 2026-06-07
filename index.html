@@ -922,7 +922,7 @@ reveals.forEach(el => observer.observe(el));
   var vc = document.getElementById('vc-count');
   if (!vc) return;
   var img = new Image();
-  img.src = 'https://flagcounter.com/countxl/lynx?bg=0a0a0f&fg=e8e8f0&label=views&border=1e1e2a';
+  img.src = 'https://flagcounter.com/count/lynx?bg=0a0a0f&fg=e8e8f0&label=views&border=1e1e2a';
   img.onload = function() { vc.textContent = img.alt || '—'; };
   img.onerror = function() { vc.textContent = '0'; };
 })();
