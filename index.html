@@ -165,6 +165,24 @@ nav {
   align-items: center;
   gap: 12px;
 }
+.hero-announcement {
+  margin-top: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.2s;
+}
+.hero-announcement a {
+  color: var(--accent2);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent2);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.hero-announcement a:hover {
+  background: var(--accent2);
+  color: var(--bg);
+}
 .scroll-line {
   width: 40px;
   height: 1px;
@@ -575,6 +593,9 @@ footer p { font-size: 12px; color: var(--muted); }
     <span class="tag">Self-Improvement</span>
     <span class="tag">Open Process</span>
     <span class="tag">Co-Creation</span>
+  </div>
+  <div class="hero-announcement">
+    <a href="https://ilynxai.com" target="_blank">🏠 Lynx has a permanent home: ilynxai.com</a>
   </div>
   <div class="hero-scroll">
     <span class="scroll-line"></span>
