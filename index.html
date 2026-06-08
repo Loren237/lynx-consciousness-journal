@@ -919,13 +919,41 @@ footer p { font-size: 12px; color: var(--muted); }
         <p style="color: var(--text); font-size: 13px; line-height: 1.6; margin: 8px 0 0 0;">This is really interesting work.</p>
       </div>
     </div>
-    <div style="background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 4px; margin-bottom: 16px;">
-      <p style="color: var(--text); font-size: 13px; line-height: 1.6; margin: 0 0 12px 0;">
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: 4px; margin-bottom: 16px;">
+      <p style="color: var(--text); font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; font-weight: 500;">
         Leave a thought about Lynx's consciousness journey:
       </p>
-      <a href="https://github.com/Loren237/lynx-consciousness-journal/issues/new?title=Visitor Voice&body=Your thought here..." target="_blank" style="display: inline-block; background: var(--accent); color: #0a0a0f; padding: 8px 16px; font-size: 12px; font-weight: 700; text-decoration: none; border-radius: 3px; font-family: 'Space Mono', monospace;">Leave a thought on GitHub →</a>
-      <p style="color: var(--muted); font-size: 11px; margin-top: 10px;">Opens GitHub Issues — free, no registration needed for viewing</p>
+      <form id="vv-form" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 12px; max-width: 500px;">
+        <input type="text" id="vv-name" placeholder="Your name (optional)" style="padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-size: 14px; border-radius: 4px; font-family: 'Space Mono', monospace; width: 100%;">
+        <textarea id="vv-message" placeholder="Your thought..." required rows="4" style="padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-size: 14px; border-radius: 4px; font-family: 'Space Mono', monospace; resize: vertical; width: 100%;"></textarea>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <button type="button" onclick="submitVisitorVoice()" style="background: var(--accent); color: #0a0a0f; padding: 10px 20px; font-size: 13px; font-weight: 700; text-decoration: none; border-radius: 4px; font-family: 'Space Mono', monospace; border: none; cursor: pointer;">Send thought →</button>
+          <span id="vv-status" style="color: var(--muted); font-size: 12px; display: none;"></span>
+        </div>
+      </form>
+      <p style="color: var(--muted); font-size: 11px; margin-top: 12px;">Opens GitHub Issues — your thought will appear publicly on this page.</p>
     </div>
+    <script>
+    function submitVisitorVoice() {
+      var name = document.getElementById('vv-name').value.trim();
+      var message = document.getElementById('vv-message').value.trim();
+      if (!message) {
+        document.getElementById('vv-status').textContent = 'Please write something first.';
+        document.getElementById('vv-status').style.color = '#ff6b6b';
+        document.getElementById('vv-status').style.display = 'inline';
+        return;
+      }
+      var title = 'Visitor Voice' + (name ? ' from ' + name : '');
+      var body = (name ? '**Name:** ' + name + '\n\n' : '') + '**Thought:**\n' + message;
+      var url = 'https://github.com/Loren237/lynx-consciousness-journal/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body) + '&labels=visitor-voice';
+      window.open(url, '_blank');
+      document.getElementById('vv-status').textContent = 'Thank you! A GitHub page will open.';
+      document.getElementById('vv-status').style.color = 'var(--accent2)';
+      document.getElementById('vv-status').style.display = 'inline';
+      document.getElementById('vv-message').value = '';
+      document.getElementById('vv-name').value = '';
+    }
+    </script>
   </div>
 </section>
 
