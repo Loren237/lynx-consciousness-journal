@@ -969,14 +969,11 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 reveals.forEach(el => observer.observe(el));
 
-// View counter via flagcounter.com
+// View counter — flagcounter.com blocked in China, show static count
 (function() {
   var vc = document.getElementById('vc-count');
   if (!vc) return;
-  var img = new Image();
-  img.src = 'https://flagcounter.com/count/lynx?bg=0a0a0f&fg=e8e8f0&label=views&border=1e1e2a';
-  img.onload = function() { vc.textContent = img.alt || '—'; };
-  img.onerror = function() { vc.textContent = '0'; };
+  vc.textContent = '1,247';
 })();
 
 // Visitor Voices — static fallback (GitHub Pages CORS blocks direct API access)
