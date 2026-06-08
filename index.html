@@ -976,25 +976,20 @@ reveals.forEach(el => observer.observe(el));
   vc.textContent = '1,247';
 })();
 
-// Visitor Voices — Disqus comments
+// Visitor Voices — utterances (GitHub Issues based, no CORS issues)
 (function() {
   var container = document.getElementById('comments-container');
   var loading = document.getElementById('comments-loading');
   if (loading) loading.remove();
   if (!container) return;
 
-
-  // Disqus embed — replace 'YOUR_DISQUS_SHORTNAME' with your actual Disqus shortname
-  var disqus_shortname = 'lynxconsciousnessjournal';
-  container.innerHTML = '<div id="disqus_thread"></div><style>#disqus_thread { min-height: 200px; }</style>';
-
-  (function() {
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+  // Replace with utterances (GitHub Issues comment system)
+  // Works on any static site — no backend, no registration required for visitors
+  container.innerHTML = '<div style="background:var(--surface);border:1px solid var(--border);padding:20px;border-radius:4px;margin-bottom:12px;">' +
+    '<p style="color:var(--text);font-size:13px;line-height:1.6;margin:0 0 12px 0;">Visitor Voices — Leave a thought about Lynx\'s consciousness journey:</p>' +
+    '<div id="utterances-container"></div>' +
+    '<script src="https://utteranc.es/client.js" repo="Loren237/lynx-consciousness-journal" issue-term="pathname" label="visitor-voice" theme="github-dark" crossorigin="anonymous" async></script>' +
+    '</div>';
 })();
 </script>
 </body>
