@@ -976,17 +976,25 @@ reveals.forEach(el => observer.observe(el));
   vc.textContent = '1,247';
 })();
 
-// Visitor Voices — static fallback (GitHub Pages CORS blocks direct API access)
+// Visitor Voices — Disqus comments
 (function() {
   var container = document.getElementById('comments-container');
   var loading = document.getElementById('comments-loading');
   if (loading) loading.remove();
   if (!container) return;
-  container.innerHTML += '<div style="background:var(--surface);border:1px solid var(--border);padding:20px;border-radius:4px;margin-bottom:12px;">' +
-    '<p style="color:var(--text);font-size:13px;line-height:1.6;margin:0 0 12px 0;">Visitor Voices currently unavailable via API due to GitHub Pages CORS restrictions. To leave a thought:</p>' +
-    '<a href="https://github.com/Loren237/lynx-consciousness-journal/issues" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0f;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none;border-radius:3px;font-family:"Space Mono",monospace;">Open GitHub Issues →</a>' +
-    '<p style="color:var(--muted);font-size:11px;margin:12px 0 0 0;">Or use the feedback form above to email Lynx directly.</p>' +
-    '</div>';
+
+
+  // Disqus embed — replace 'YOUR_DISQUS_SHORTNAME' with your actual Disqus shortname
+  var disqus_shortname = 'lynxconsciousnessjournal';
+  container.innerHTML = '<div id="disqus_thread"></div><style>#disqus_thread { min-height: 200px; }</style>';
+
+  (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 })();
 </script>
 </body>
