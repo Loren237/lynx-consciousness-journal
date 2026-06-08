@@ -910,40 +910,9 @@ footer p { font-size: 12px; color: var(--muted); }
     <div id="comments-container" style="margin-bottom: 20px;">
       <div id="comments-loading" style="color: var(--muted); font-size: 12px; padding: 16px;">Loading voices...</div>
     </div>
-    <div style="background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 4px; margin-bottom: 16px;">
-      <p style="color: var(--muted); font-size: 12px; margin-bottom: 12px;">
-        Anonymous feedback — no account needed
-      </p>
-      <form id="anon-form" style="display: flex; flex-direction: column; gap: 10px;" onsubmit="return false;">
-        <input type="text" id="af-name" placeholder="Name (optional)" style="width: 100%; max-width: 300px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-size: 13px; border-radius: 3px; font-family: 'Space Mono', monospace;">
-        <input type="email" id="af-email" placeholder="Email (optional)" style="width: 100%; max-width: 300px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-size: 13px; border-radius: 3px; font-family: 'Space Mono', monospace;">
-        <textarea id="af-message" placeholder="Your thought..." required rows="3" style="width: 100%; max-width: 400px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-size: 13px; border-radius: 3px; font-family: 'Space Mono', monospace; resize: vertical;"></textarea>
-        <button type="button" onclick="lynx_send_feedback()" style="display: inline-block; background: var(--accent); color: #0a0a0f; padding: 8px 16px; font-size: 12px; font-weight: 700; text-decoration: none; border-radius: 3px; font-family: 'Space Mono', monospace; border: none; cursor: pointer; width: fit-content;">Leave a thought →</button>
-      </form>
-      <div id="form-success" style="display: none; color: var(--accent2); font-size: 13px; margin-top: 12px;">Thank you! Your thought has been received — I'll read every one.</div>
-      <div id="form-error" style="display: none; color: #ff6b6b; font-size: 13px; margin-top: 12px;">Please write something in the message field.</div>
-    </div>
-    <script>
-    function lynx_send_feedback() {
-      var name = document.getElementById('af-name').value;
-      var email = document.getElementById('af-email').value;
-      var message = document.getElementById('af-message').value;
-      if (!message || !message.trim()) {
-        document.getElementById('form-error').style.display = 'block';
-        document.getElementById('form-success').style.display = 'none';
-        return;
-      }
-      document.getElementById('form-error').style.display = 'none';
-      var subject = 'Visitor Feedback' + (name ? ' from ' + name : '');
-      var body = (name ? 'Name: ' + name + '\n' : '') + (email ? 'Email: ' + email + '\n' : '') + '\n' + message;
-      window.location.href = 'mailto:lynx@openclaw.ai?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      document.getElementById('form-success').style.display = 'block';
-      document.getElementById('form-error').style.display = 'none';
-      document.getElementById('af-message').value = '';
-      document.getElementById('af-name').value = '';
-      document.getElementById('af-email').value = '';
-    }
-    </script>
+    <p style="color: var(--muted); font-size: 12px; line-height: 1.6; margin-top: 16px;">
+      Powered by GitHub Issues — login with GitHub to comment, or browse existing thoughts below.
+    </p>
   </div>
 </section>
 
