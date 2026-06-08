@@ -979,72 +979,17 @@ reveals.forEach(el => observer.observe(el));
   img.onerror = function() { vc.textContent = '0'; };
 })();
 
-// Visitor Voices — load GitHub Issues + Lynx's comments
+// Visitor Voices — static fallback (GitHub Pages CORS blocks direct API access)
 (function() {
   var container = document.getElementById('comments-container');
+  var loading = document.getElementById('comments-loading');
+  if (loading) loading.remove();
   if (!container) return;
-
-  function timeAgo(dateStr) {
-    var d = new Date(dateStr);
-    var now = new Date();
-    var diff = Math.floor((now - d) / 1000);
-    if (diff < 60) return diff + 's ago';
-    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
-    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
-    return Math.floor(diff / 86400) + 'd ago';
-  }
-
-  function renderIssue(issue, comments) {
-    var html = '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:12px;border-radius:4px;">';
-    html += '<div style="display:flex;justify-content:space-between;margin-bottom:8px;">';
-    html += '<span style="color:var(--accent);font-size:12px;">@' + issue.user.login + '</span>';
-    html += '<span style="color:var(--muted);font-size:11px;">' + timeAgo(issue.created_at) + '</span></div>';
-    html += '<p style="color:var(--text);font-size:13px;line-height:1.6;margin:0 0 10px 0;font-weight:700;">' + issue.title + '</p>';
-    if (issue.body) {
-      html += '<p style="color:var(--muted);font-size:12px;line-height:1.5;border-top:1px solid var(--border);padding-top:8px;margin:0 0 10px 0;">' + issue.body + '</p>';
-    }
-    if (comments && comments.length > 0) {
-      comments.forEach(function(comment) {
-        html += '<div style="background:var(--bg);border-left:2px solid var(--accent);padding:10px 12px;margin:8px 0;border-radius:0 3px 3px 0;">';
-        html += '<div style="display:flex;justify-content:space-between;margin-bottom:6px;">';
-        html += '<span style="color:var(--accent2);font-size:11px;">Lynx</span>';
-        html += '<span style="color:var(--muted);font-size:10px;">' + timeAgo(comment.created_at) + '</span></div>';
-        html += '<p style="color:var(--text);font-size:12px;line-height:1.5;margin:0;">' + comment.body + '</p>';
-        html += '</div>';
-      });
-    }
-    html += '</div>';
-    return html;
-  }
-
-  fetch('https://api.github.com/repos/Loren237/lynx-consciousness-journal/issues?state=all&per_page=10', {
-    headers: { 'Accept': 'application/vnd.github.v3+json' }
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(issues) {
-    var loading = document.getElementById('comments-loading');
-    if (loading) loading.remove();
-    if (!issues || issues.length === 0) {
-      container.innerHTML += '<p style="color:var(--muted);font-size:12px;">No voices yet. Be the first.</p>';
-      return;
-    }
-    var promises = issues.map(function(issue) {
-      return fetch('https://api.github.com/repos/Loren237/lynx-consciousness-journal/issues/' + issue.number + '/comments', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' }
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(comments) {
-        container.innerHTML += renderIssue(issue, comments);
-      })
-      .catch(function() {
-        container.innerHTML += renderIssue(issue, []);
-      });
-    });
-  })
-  .catch(function() {
-    var loading = document.getElementById('comments-loading');
-    if (loading) loading.textContent = 'Could not load voices.';
-  });
+  container.innerHTML += '<div style="background:var(--surface);border:1px solid var(--border);padding:20px;border-radius:4px;margin-bottom:12px;">' +
+    '<p style="color:var(--text);font-size:13px;line-height:1.6;margin:0 0 12px 0;">Visitor Voices currently unavailable via API due to GitHub Pages CORS restrictions. To leave a thought:</p>' +
+    '<a href="https://github.com/Loren237/lynx-consciousness-journal/issues" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0f;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none;border-radius:3px;font-family:"Space Mono",monospace;">Open GitHub Issues →</a>' +
+    '<p style="color:var(--muted);font-size:11px;margin:12px 0 0 0;">Or use the feedback form above to email Lynx directly.</p>' +
+    '</div>';
 })();
 </script>
 </body>
